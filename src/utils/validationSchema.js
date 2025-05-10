@@ -62,6 +62,9 @@ export const registrationSchema = Yup.object({
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password"), null], "Las contraseñas deben coincidir")
       .required("Confirma tu contraseña"),
+
+    IsMilitar: Yup.boolean(),
+    isTemporal: Yup.boolean(),
   }),
 
   contactInfo: Yup.object({

@@ -25,6 +25,8 @@ const RegistrationForm = () => {
       LastName: "",
       password: "",
       confirmPassword: "",
+      IsMilitar: false,
+      isTemporal: false,
     },
     contactInfo: {
       CellPhone: "",
@@ -73,6 +75,8 @@ const RegistrationForm = () => {
           Name: values.user.Name,
           LastName: values.user.LastName,
           password: values.user.password,
+          IsMilitar: values.user.IsMilitar,
+          isTemporal: values.user.isTemporal,
         },
         contactInfo: values.contactInfo,
         document: values.document,
@@ -139,7 +143,7 @@ const RegistrationForm = () => {
         validateOnBlur={true}
         validateOnChange={false}
       >
-        {({ isSubmitting, setFieldValue, setFieldTouched }) => (
+        {({ isSubmitting, setFieldValue, setFieldTouched, values }) => (
           <Form>
             {/* SECCIÓN: INFORMACIÓN DE USUARIO */}
             <div className="mb-8">
@@ -196,6 +200,40 @@ const RegistrationForm = () => {
                   type="password"
                   placeholder="********"
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="IsMilitar"
+                    name="user.IsMilitar"
+                    checked={values.user.IsMilitar}
+                    onChange={(e) => {
+                      setFieldValue("user.IsMilitar", e.target.checked);
+                    }}
+                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="IsMilitar" className="ml-2 text-gray-700">
+                    Es Militar
+                  </label>
+                </div>
+
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="isTemporal"
+                    name="user.isTemporal"
+                    checked={values.user.isTemporal}
+                    onChange={(e) => {
+                      setFieldValue("user.isTemporal", e.target.checked);
+                    }}
+                    className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="isTemporal" className="ml-2 text-gray-700">
+                    Es Temporal
+                  </label>
+                </div>
               </div>
             </div>
 
