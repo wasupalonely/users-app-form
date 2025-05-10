@@ -91,7 +91,20 @@ const RegistrationForm = () => {
       setRegisterSuccess(true);
       resetForm();
     } catch (error) {
-      toast.error(error.response.errors[0].extensions.originalError.message[0].split(".")[1]);
+      let errorMessage = "Error al registrar usuario";
+
+      if (error.response?.errors?.length > 0) {
+        const gqlError = error.response.errors[0];
+        if (gqlError.extensions?.originalError?.message) {
+          errorMessage = gqlError.extensions.originalError.message;
+        } else if (gqlError.message) {
+          errorMessage = gqlError.message;
+        }
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      toast.error(errorMessage);
       console.error("Error en registro:", error);
     } finally {
       setSubmitting(false);
